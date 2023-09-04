@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div *ngIf="loaderService.isLoad$ | async" class="loader_container">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="main">
+  <app-side-menu></app-side-menu>
+  <div class="main_content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

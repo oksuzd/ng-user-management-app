@@ -1,0 +1,72 @@
+<div class="dialog-wrap">
+  <h1 mat-dialog-title>Adding the User</h1>
+  <div mat-dialog-content>
+
+    <form [formGroup]="newUserForm">
+      <div class="dialog-wrap">
+        <label class="dialog-wrap_label">First Name</label>
+        <input class="dialog-wrap_input"
+               formControlName="firstName"
+               [class.invalid]="!isValid('firstName')"
+        />
+        <div class="dialog-wrap_errors">
+          <div class="error" *ngIf="hasError('firstName', 'required')"
+          >This field is required
+          </div>
+          <div class="error" *ngIf="hasError('firstName', 'minlength')"
+          >Enter at least 3 letters
+          </div>
+          <div class="error" *ngIf="hasError('firstName', 'invalidName')"
+          >No numbers or special characters
+          </div>
+        </div>
+      </div>
+
+      <div class="dialog-wrap">
+        <label class="dialog-wrap_label">Last Name</label>
+        <input class="dialog-wrap_input"
+               formControlName="lastName"
+               [class.invalid]="!isValid('lastName')"
+        />
+        <div class="dialog-wrap_errors">
+          <div class="error" *ngIf="hasError('lastName','required')"
+          >This field is required
+          </div>
+          <div class="error" *ngIf="hasError('lastName', 'minlength')"
+          >Enter at least 3 letters
+          </div>
+          <div class="error" *ngIf="hasError('lastName', 'invalidName')"
+          >No numbers or special characters
+          </div>
+        </div>
+      </div>
+
+      <div class="dialog-wrap">
+        <label class="dialog-wrap_label">Email</label>
+        <input class="dialog-wrap_input"
+               formControlName="email"
+               (blur)="onBlur()"
+               [class.invalid]="!isValid('email')"
+        />
+        <div class="dialog-wrap_errors">
+          <div class="error" *ngIf="hasError('email','required')"
+          >This field is required
+          </div>
+          <div class="error" *ngIf="hasError('email', 'email')"
+          >Enter a valid email
+          </div>
+          <div class="error" *ngIf="hasError('email', 'existingEmail')"
+          >User with the same email already exists
+          </div>
+        </div>
+      </div>
+
+      <div class="dialog-wrap_buttons-group">
+        <button mat-button (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+        <button mat-button [disabled]="newUserForm.invalid"
+                [mat-dialog-close]="newUserForm.value">Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

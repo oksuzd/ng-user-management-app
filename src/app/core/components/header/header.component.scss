@@ -1,0 +1,31 @@
+@import "../../../../assets/styles/colors";
+
+:host {
+  height: 50px;
+  flex: 0 0 50px;
+  background: $main-background;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    &__left {
+      width: 15%;
+    }
+
+    &__center {
+      width: 70%;
+    }
+
+    &__right {
+      justify-content: center;
+      width: 15%;
+    }
+  }
+}

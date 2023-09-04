@@ -1,0 +1,46 @@
+<div class="dialog-wrap">
+  <h1 mat-dialog-title>Login</h1>
+  <div mat-dialog-content>
+
+    <form [formGroup]="loginForm">
+      <div class="dialog-wrap">
+        <label class="dialog-wrap_label">Email</label>
+        <input class="dialog-wrap_input"
+               placeholder="eve.holt@reqres.in"
+               formControlName="email"
+               [class.invalid]="!isValid('email')"
+        />
+        <div class="dialog-wrap_errors">
+          <div class="error" *ngIf="hasError('email','required')"
+          >This field is required
+          </div>
+          <div class="error" *ngIf="hasError('email', 'email')"
+          >Enter a valid email
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isUserLoggedIn" class="dialog-wrap">
+        <label class="dialog-wrap_label">Password</label>
+        <input class="dialog-wrap_input"
+               type="password"
+               formControlName="password"
+               [class.invalid]="!isValid('password')"
+        />
+        <div class="dialog-wrap_errors">
+          <div class="error" *ngIf="hasError('password','required')"
+          >This field is required
+          </div>
+        </div>
+      </div>
+
+      <div class="dialog-wrap_buttons-group">
+        <button mat-button (click)="onCancelClick()" cdkfocusinitial="">Cancel</button>
+        <button *ngIf="isUserLoggedIn" mat-button (click)="onLogOutClick()">LogOut</button>
+        <button *ngIf="!isUserLoggedIn" mat-button (click)="onLogInClick(loginForm.value)"
+                [disabled]="loginForm.invalid">LogIn
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

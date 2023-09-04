@@ -1,0 +1,18 @@
+.loader_container {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
+.main {
+  display: flex;
+  height: calc(100% - 50px);
+
+  &_content {
+    display: flex;
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: center;
+  }
+}

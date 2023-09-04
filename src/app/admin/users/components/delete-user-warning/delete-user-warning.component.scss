@@ -1,0 +1,13 @@
+@import "../../../../../assets/styles/colors";
+
+.dialog-wrap {
+  background-color: $dark-background;
+
+  h1, &_content {
+    text-align: center;
+  }
+
+  &_buttons-group {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,10 @@
+<div class="dialog-wrap">
+  <h1 mat-dialog-title>Deleting the User</h1>
+  <div class="dialog-wrap_content" mat-dialog-content>
+    Are you sure you want to delete this user?
+  </div>
+  <div mat-dialog-actions class="dialog-wrap_buttons-group">
+    <button mat-button [mat-dialog-close]="true">Yes</button>
+    <button mat-button (click)="onNoClick()" cdkFocusInitial>No</button>
+  </div>
+</div>

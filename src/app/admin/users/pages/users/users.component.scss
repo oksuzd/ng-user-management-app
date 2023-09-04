@@ -1,0 +1,52 @@
+@import "../../../../../assets/styles/colors";
+
+:host {
+  width: 85%;
+  height: calc(100% - 25px);
+  padding: 15px;
+
+
+  .users-grid {
+    width: 100%;
+    height: inherit !important;
+
+    ::ng-deep {
+      .cells-styling {
+        display: flex;
+        align-items: center;
+        border-left: 1px solid #dde2eb;
+        border-right: 1px solid #dde2eb;
+
+        &__center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .user-avatar {
+        padding: 0 !important;
+        line-height: 1;
+
+        img {
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      .ag-cell.invalid {
+        border: 1px solid red;
+      }
+    }
+  }
+}
+
+.user-instruments {
+  text-align: right;
+  padding-bottom: 15px;
+
+  &_button {
+    margin-left: 15px;
+    background-color: $main-background;
+  }
+}

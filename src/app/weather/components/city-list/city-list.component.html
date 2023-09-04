@@ -1,0 +1,51 @@
+<div class="cities-list">
+  <div class="cities-list_current-city">
+    <div class="cities-list_title">
+      <h3>Current City</h3>
+    </div>
+    <div *ngIf="!currentLocation.id" class="cities-list_item item-placeholder">Please, wait...</div>
+    <div *ngIf="currentLocation.id" class="cities-list_item"
+         (click)="chooseLocation(currentLocation)"
+    >
+      <button class="cities-list_item-name"
+              mat-button color="primary"
+      >
+        {{currentLocation.city}}, {{currentLocation.countryCode | uppercase}}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="listOfLocations.length > 1" class="cities-list_list-wrap">
+    <div class="cities-list_title">
+      <h3>List of cities</h3>
+    </div>
+    <div class="cities-list_items-wrap">
+      <ul class="cities-list_items">
+        <li class="cities-list_item"
+            *ngFor="let location of listOfLocations; first as isFirst"
+        >
+          <button *ngIf="!isFirst"
+                  class="cities-list_item-name"
+                  mat-button color="primary"
+                  (click)="chooseLocation(location)"
+          >
+            {{location.city}}, {{location.countryCode | uppercase}}
+          </button>
+          <button *ngIf="!isFirst"
+                  class="cities-list_item-delete"
+                  mat-button color="warn"
+                  (click)="deleteLocation(location)"
+          >
+            X
+          </button>
+        </li>
+      </ul>
+    </div>
+    <button class="cities-list_clear"
+            mat-button color="warn"
+            (click)="clearLocationsList()"
+    >
+      Clear the list
+    </button>
+  </div>
+</div>
