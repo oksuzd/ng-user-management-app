@@ -25,7 +25,7 @@
     }
 
     &_items-wrap {
-      height: calc(100vh - 198px);
+      height: calc(100vh - 226px);
       overflow-y: auto;
     }
 
@@ -33,6 +33,11 @@
       margin: 0;
       padding: 0;
       list-style: none;
+    }
+
+    &_item-current {
+      height: 48px;
+      overflow-y: auto;
     }
 
     &_item {
@@ -60,7 +65,17 @@
     }
 
     &_clear {
-      color: #e08fed;
+      //width: 100%;
+      border-top: 2px solid $light-border;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      text-align: center;
+
+      button {
+        //outline: 1px solid black;
+        width: 100%;
+        color: #e08fed;
+      }
     }
   }
 
