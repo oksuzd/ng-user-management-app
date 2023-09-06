@@ -61,6 +61,6 @@ export class DayWeatherComponent implements OnInit, OnDestroy {
       let randUrl = this.cityPhotos[Math.floor(Math.random() * this.cityPhotos.length)]
       return `url(${randUrl})`
     }
-    return 'url(../../../../assets/img/weather.jpg)';
+    return 'url(/assets/img/weather.jpg)';
   }
 }
