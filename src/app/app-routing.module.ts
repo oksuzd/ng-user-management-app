@@ -7,11 +7,6 @@ import { authGuard } from "./guards/users-admin.guard";
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {
-    path: 'colors',
-    loadChildren: () => import('./colors-cards/colors-cards.module')
-      .then((m) => m.ColorsCardsModule),
-  },
-  {
     path: 'weather', loadChildren: () => import('./weather/weather.module')
       .then((m) => m.WeatherModule)
   },
