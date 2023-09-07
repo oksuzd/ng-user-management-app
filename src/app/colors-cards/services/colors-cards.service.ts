@@ -10,15 +10,14 @@ export class ColorsCardsService {
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {}
 
   getColorsCards(): Observable<ColorCard[]> {
     return this.http.get<ColorsCardsResponse>(REQUEST_URL + 'cards')
-      .pipe(map((res) => this.getMappedColorCards(res.data)))
+      .pipe(map((res) => this.getMappedColorCards(res.data)));
   }
 
   private getMappedColorCards(cards: ColorCardDataResponse[]): ColorCard[] {
-    return cards.map((user) => user)
+    return cards.map((user) => user);
   }
-
 }

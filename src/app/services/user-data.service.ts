@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { UserDataResponse, UserResponse } from "./models/response.model";
+import { UserDataResponse, UserResponse } from "../models/response.model";
 import { BehaviorSubject, map, mergeMap, Observable, of, take } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
-import { REQUEST_URL } from "./shared/constants";
-import { UserLogin, userToken } from "./models/login.model";
-import { User } from "./models/user.model";
+import { REQUEST_URL } from "../shared/constants";
+import { UserLogin, userToken } from "../models/login.model";
+import { User } from "../models/user.model";
 import { CookieService } from "ngx-cookie-service";
-
 
 @Injectable({providedIn: 'root'})
 export class UserDataService {
@@ -41,10 +40,6 @@ export class UserDataService {
   deleteUser(id: number): Observable<boolean> {
     return this.http.delete<boolean>(REQUEST_URL + `users/${id}`);
   }
-
-  // request404(): Observable<void> {
-  //   return this.http.get<any>(REQUEST_URL + `/23`)
-  // }
 
   logInUser(user: UserLogin): Observable<userToken> {
     return this.http.post<userToken>(REQUEST_URL + 'login', user);

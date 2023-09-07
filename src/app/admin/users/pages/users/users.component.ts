@@ -10,10 +10,9 @@ import {
 
 import { MatDialog } from "@angular/material/dialog";
 import { AddUserComponent } from "../../components/add-user/add-user.component";
-import { UserDataService } from "../../../../user-data.service";
+import { UserDataService } from "../../../../services/user-data.service";
 import { User } from "../../../../models/user.model";
 import { UsersGridService } from "../../services/users-grid.service";
-
 
 @Component({
   selector: 'app-users',
@@ -39,8 +38,7 @@ export class UsersComponent implements OnDestroy {
     private userDataService: UserDataService,
     public usersGridService: UsersGridService,
     public dialog: MatDialog
-  ) {
-  }
+  ) {}
 
   ngOnDestroy() {
     this.notifier$.next(null);
@@ -58,7 +56,7 @@ export class UsersComponent implements OnDestroy {
       )
       .subscribe((data) => {
         this.rowData = data;
-        this.columnDefs = this.usersGridService.getColDef(data, this.gridApi)
+        this.columnDefs = this.usersGridService.getColDef(data, this.gridApi);
       });
   }
 
@@ -79,8 +77,8 @@ export class UsersComponent implements OnDestroy {
     const dialogRef = this.dialog.open(AddUserComponent, {width: '350px'});
     dialogRef.afterClosed()
       .subscribe((res) => {
-        !!res && this.createUser(res)
-      })
+        !!res && this.createUser(res);
+      });
   }
 
   private createUser(user: User) {
@@ -97,7 +95,7 @@ export class UsersComponent implements OnDestroy {
           this.rowData.push(res);
           this.gridApi.setRowData(this.rowData);
         }
-      )
+      );
   }
 
   private updateUser(user: User) {
@@ -112,7 +110,7 @@ export class UsersComponent implements OnDestroy {
           this.rowData[itemIndex] = res;
           this.gridApi.setRowData(this.rowData);
         }
-      )
+      );
   }
 
   private isUserDataValid(user: User) {

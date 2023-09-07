@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserDataService } from "../../../user-data.service";
+import { UserDataService } from "../../../services/user-data.service";
 import { catchError, Subject, takeUntil, throwError } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { CookieService } from "ngx-cookie-service";
@@ -51,6 +51,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.isLoggedIn = false;
           this.userName = 'Login';
         }
-      })
+      });
   }
 }

@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {LoaderService} from "./interceptors/loader/loader.service";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { LoaderService } from "./interceptors/loader/loader.service";
 
 @Component({
   selector: 'app-root',

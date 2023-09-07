@@ -24,4 +24,4 @@ const routes: Routes = [
     ColorsCardsService,
   ]
 })
-export class ColorsCardsModule { }
+export class ColorsCardsModule {}

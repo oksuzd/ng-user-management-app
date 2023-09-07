@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, Subject, takeUntil, throwError } from "rxjs";
-import { UserDataService } from "../../../user-data.service";
+import { UserDataService } from "../../../services/user-data.service";
 
 @Component({
   selector: 'app-side-menu',
@@ -23,12 +23,11 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe((res) => this.isLoggedIn = res)
+      .subscribe((res) => this.isLoggedIn = res);
   }
 
   ngOnDestroy() {
     this.notifier$.next(null);
-    this.notifier$.complete()
+    this.notifier$.complete();
   }
 }
-

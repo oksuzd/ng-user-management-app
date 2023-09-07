@@ -15,7 +15,7 @@ export class AddUserComponent {
     firstName: ['', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
     lastName: ['', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
     email: ['', [Validators.required, Validators.email]]
-  })
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -24,11 +24,6 @@ export class AddUserComponent {
 
   onCancelClick() {
     this.dialogRef.close();
-  }
-
-  //  check onBlur if email is taken
-  onBlur() {
-    //TODO
   }
 
   isValid(controlName: string): boolean | undefined {

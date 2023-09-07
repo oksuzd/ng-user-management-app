@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {WeatherLocation} from "../models/weather-widget.models";
-import {BehaviorSubject, Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { WeatherLocation } from "../models/weather-widget.models";
+import { BehaviorSubject, Observable } from "rxjs";
 
 export const initialLocation: WeatherLocation = {
   id: '',
   latitude: '',
   longitude: '',
-}
+};
 
 @Injectable()
 export class WeatherStoreService {

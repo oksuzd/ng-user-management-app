@@ -5,7 +5,7 @@ import { NotFoundPageComponent } from "./core/pages/not-found-page/not-found-pag
 import { authGuard } from "./guards/users-admin.guard";
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  {path: '', component: HomePageComponent},
   {
     path: 'colors',
     loadChildren: () => import('./colors-cards/colors-cards.module')
@@ -21,11 +21,11 @@ const routes: Routes = [
       .then((m) => m.UsersModule),
     canActivate: [authGuard]
   },
-  { path: '**', component: NotFoundPageComponent},
+  {path: '**', component: NotFoundPageComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

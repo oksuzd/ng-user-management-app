@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {catchError, Subject, takeUntil, throwError} from "rxjs";
-import {WeatherStoreService} from "../../services/weather-store.service";
-import {WeatherLocation} from "../../models/weather-widget.models";
-import {WeatherDataService} from "../../services/weather-data.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { catchError, Subject, takeUntil, throwError } from "rxjs";
+import { WeatherStoreService } from "../../services/weather-store.service";
+import { WeatherLocation } from "../../models/weather-widget.models";
+import { WeatherDataService } from "../../services/weather-data.service";
 
 @Component({
   selector: 'app-city-list',
@@ -53,7 +53,7 @@ export class CityListComponent implements OnInit, OnDestroy {
           this.weatherDataService.saveLocalStorageLocationsList(this.listOfLocations);
           this.cdr.detectChanges();
         }
-      })
+      });
   }
 
   chooseLocation(location: WeatherLocation) {
@@ -68,7 +68,7 @@ export class CityListComponent implements OnInit, OnDestroy {
 
   clearLocationsList() {
     this.weatherDataService.clearLocalStorageLocationsList();
-    this.listOfLocations.length = 1;
+    this.listOfLocations = [];
     this.cdr.detectChanges();
   }
 }

@@ -17,10 +17,10 @@ export interface UserDataResponse {
 
 interface ResponseSupport {
   text: string;
-  url: string
+  url: string;
 }
 
-export  interface ColorsCardsResponse{
+export interface ColorsCardsResponse {
   page: number;
   per_page: number;
   total: number;

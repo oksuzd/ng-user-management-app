@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialogRef} from "@angular/material/dialog";
-import {UserDataService} from "../../../user-data.service";
-import {UserLogin, userToken} from "../../../models/login.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {catchError, map, mergeMap, Subject, take, takeUntil, throwError} from "rxjs";
-import {CookieService} from "ngx-cookie-service";
-import {User} from "../../../models/user.model";
-import {Router} from "@angular/router";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { UserDataService } from "../../../services/user-data.service";
+import { UserLogin, userToken } from "../../../models/login.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { catchError, map, mergeMap, Subject, take, takeUntil, throwError } from "rxjs";
+import { CookieService } from "ngx-cookie-service";
+import { User } from "../../../models/user.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup = this.fb.group({
     email: ['eve.holt@reqres.in', [Validators.required, Validators.email]],
     password: ['', Validators.required]
-  })
+  });
 
   private notifier$: Subject<null> = new Subject();
 
@@ -32,8 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private userDataService: UserDataService,
     private cookie: CookieService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     if (this.cookie.check('user')) {
@@ -64,15 +63,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           return this.userDataService.getUsers().pipe(
             map((usersList) => {
               const loggedUser = usersList.filter((userFullData) => userFullData.email === userLoginData.email);
-              return this.getStringCookieValue(loggedUser[0], token)
+              return this.getStringCookieValue(loggedUser[0], token);
             })
-          )
+          );
         }),
         take(1),
         takeUntil(this.notifier$),
         catchError(err => {
           if (err.status === 400) {
-            this.snackBar.open('User not found', ' X ')
+            this.snackBar.open('User not found', ' X ');
           }
           return throwError(() => err);
         })
@@ -83,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.userDataService.setUserLoginStatus(!!res);
           this.dialogRef.close();
         }
-      })
+      });
   }
 
   onLogOutClick() {
@@ -99,13 +98,13 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loginForm.setValue({
             email: '',
             password: ''
-          })
+          });
           this.isUserLoggedIn = false;
           this.loginForm.get('email')?.enable();
           this.userDataService.setUserLoginStatus(false);
           this.router.navigate(['/']).then();
         }
-      })
+      });
   }
 
   isValid(controlName: string): boolean | undefined {

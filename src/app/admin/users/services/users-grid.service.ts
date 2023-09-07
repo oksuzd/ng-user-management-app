@@ -4,7 +4,7 @@ import { AgRowDeleteComponent } from "../grid-components/ag-row-delete/ag-row-de
 import { catchError, Subject, take, takeUntil, tap, throwError } from "rxjs";
 import { User, UserCellsParams } from "../../../models/user.model";
 import { isNameValid } from "../validators/reg-name.validator";
-import { UserDataService } from "../../../user-data.service";
+import { UserDataService } from "../../../services/user-data.service";
 
 @Injectable()
 export class UsersGridService implements OnDestroy {
@@ -17,7 +17,7 @@ export class UsersGridService implements OnDestroy {
 
   ngOnDestroy() {
     this.notifier$.next(null);
-    this.notifier$.complete()
+    this.notifier$.complete();
   }
 
   getColDef(rowData: User[], gridApi: GridApi<User>): ColDef[] {

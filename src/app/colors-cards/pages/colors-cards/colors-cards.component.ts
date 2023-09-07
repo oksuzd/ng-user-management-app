@@ -8,7 +8,7 @@ import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
   templateUrl: './colors-cards.component.html',
   styleUrls: ['./colors-cards.component.scss']
 })
-export class ColorsCardsComponent implements OnInit, OnDestroy{
+export class ColorsCardsComponent implements OnInit, OnDestroy {
 
   cards: ColorCard[] = [];
   private notifier$: Subject<null> = new Subject();
@@ -25,7 +25,7 @@ export class ColorsCardsComponent implements OnInit, OnDestroy{
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe((res) => this.cards = res)
+      .subscribe((res) => this.cards = res);
   }
 
   ngOnDestroy() {

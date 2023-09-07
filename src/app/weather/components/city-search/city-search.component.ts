@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {WeatherStoreService} from "../../services/weather-store.service";
-import {WeatherDataService} from "../../services/weather-data.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { WeatherStoreService } from "../../services/weather-store.service";
+import { WeatherDataService } from "../../services/weather-data.service";
 import {
   BehaviorSubject,
   catchError,
@@ -11,7 +11,7 @@ import {
   takeUntil,
   throwError
 } from "rxjs";
-import {WeatherLocation} from "../../models/weather-widget.models";
+import { WeatherLocation } from "../../models/weather-widget.models";
 
 @Component({
   selector: 'app-city-search',
@@ -60,7 +60,7 @@ export class CitySearchComponent implements OnInit, OnDestroy {
       .subscribe((locations) => {
         this.citiesVariants = locations;
         this.cdr.detectChanges();
-      })
+      });
   }
 
   setSearchingCity(event: any) {

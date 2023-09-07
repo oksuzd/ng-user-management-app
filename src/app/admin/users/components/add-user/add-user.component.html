@@ -45,7 +45,6 @@
         <label class="dialog-wrap_label">Email</label>
         <input class="dialog-wrap_input"
                formControlName="email"
-               (blur)="onBlur()"
                [class.invalid]="!isValid('email')"
         />
         <div class="dialog-wrap_errors">
@@ -62,7 +61,7 @@
       </div>
 
       <div class="dialog-wrap_buttons-group">
-        <button mat-button (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+        <button mat-button (click)="onCancelClick()">Cancel</button>
         <button mat-button [disabled]="newUserForm.invalid"
                 [mat-dialog-close]="newUserForm.value">Add
         </button>

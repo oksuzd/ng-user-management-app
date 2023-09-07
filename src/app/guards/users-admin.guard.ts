@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { UserDataService } from "../user-data.service";
+import { UserDataService } from "../services/user-data.service";
 import { Router } from "@angular/router";
 import { map, take } from "rxjs";
 
@@ -18,5 +18,5 @@ export const authGuard = () => {
         }
         return true;
       })
-    )
-}
+    );
+};

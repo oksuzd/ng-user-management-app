@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {catchError, Subject, switchMap, takeUntil, throwError} from "rxjs";
-import {WeatherDataService} from "../../services/weather-data.service";
-import {WeatherStoreService} from "../../services/weather-store.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { catchError, Subject, switchMap, takeUntil, throwError } from "rxjs";
+import { WeatherDataService } from "../../services/weather-data.service";
+import { WeatherStoreService } from "../../services/weather-store.service";
 
 
 @Component({
@@ -23,14 +23,14 @@ export class WeatherComponent implements OnInit, OnDestroy {
       this.weatherDataService.getIpLocation()
         .pipe(
           switchMap((res) => {
-            return this.weatherDataService.getGeoLocationByCoordinates(res.latitude, res.longitude)
+            return this.weatherDataService.getGeoLocationByCoordinates(res.latitude, res.longitude);
           }),
           catchError((err) => throwError(() => err)),
           takeUntil(this.notifier$),
         )
         .subscribe((res) => {
           this.weatherStoreService.setLocationState(res);
-        })
+        });
     }
   }
 

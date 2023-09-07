@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ColorCard } from "../../../models/color-cards.model";
 import { Position, TitleBorder, AngleRotate, Expand } from "./color-card-item.animations";
 
-
 @Component({
   selector: 'app-color-card-item',
   templateUrl: './color-card-item.component.html',

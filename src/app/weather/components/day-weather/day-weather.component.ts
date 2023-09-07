@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {catchError, filter, forkJoin, of, Subject, switchMap, takeUntil, throwError} from "rxjs";
-import {WeatherDataService} from "../../services/weather-data.service";
-import {WeatherCurrentData} from "../../models/weather-widget.models";
-import {WeatherStoreService} from "../../services/weather-store.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { catchError, filter, forkJoin, of, Subject, switchMap, takeUntil, throwError } from "rxjs";
+import { WeatherDataService } from "../../services/weather-data.service";
+import { WeatherCurrentData } from "../../models/weather-widget.models";
+import { WeatherStoreService } from "../../services/weather-store.service";
 
 @Component({
   selector: 'app-day-weather',
@@ -43,7 +43,7 @@ export class DayWeatherComponent implements OnInit, OnDestroy {
             this.weatherServiceData.getCityPhotos(cityQuery),
             this.weatherServiceData.getWeatherData(cityQuery),
             of(res.city!)
-          ])
+          ]);
         }),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
@@ -53,13 +53,13 @@ export class DayWeatherComponent implements OnInit, OnDestroy {
         this.cityWeather = weather;
         this.cityName = city;
         this.cdr.detectChanges();
-      })
+      });
   }
 
   getBackgroundImage(): string {
     if (this.cityPhotos.length > 0) {
-      let randUrl = this.cityPhotos[Math.floor(Math.random() * this.cityPhotos.length)]
-      return `url(${randUrl})`
+      let randUrl = this.cityPhotos[Math.floor(Math.random() * this.cityPhotos.length)];
+      return `url(${randUrl})`;
     }
     return 'url(assets/img/weather.jpg)';
   }
