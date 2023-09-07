@@ -5,8 +5,7 @@ import { NotFoundPageComponent } from "./core/pages/not-found-page/not-found-pag
 import { authGuard } from "./guards/users-admin.guard";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent },
+  { path: '', component: HomePageComponent },
   {
     path: 'colors',
     loadChildren: () => import('./colors-cards/colors-cards.module')
