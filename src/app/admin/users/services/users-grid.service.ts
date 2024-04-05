@@ -66,6 +66,7 @@ export class UsersGridService implements OnDestroy {
                 tap(() => {
                   rowData = rowData.filter((user) => user.id !== entity.id);
                   gridApi.setRowData(rowData);
+                  this.userDataService.setUsersList(rowData);
                 }),
                 take(1),
                 takeUntil(this.notifier$),

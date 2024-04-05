@@ -15,13 +15,14 @@ export class AgRowDeleteComponent implements ICellRendererAngularComp {
 
   params!: ICellRendererParams & UserCellsParams;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+  }
 
   agInit(params: ICellRendererParams & UserCellsParams) {
     this.params = params;
   }
 
-  refresh(params: ICellRendererParams): boolean {
+  refresh(): boolean {
     return false;
   }
 
@@ -31,6 +32,7 @@ export class AgRowDeleteComponent implements ICellRendererAngularComp {
       .subscribe((res) => {
         if (!!res) {
           this.params.onDelete(this.params.data);
+          console.log('afterClosed', this.params.data.id);
         }
       });
   }

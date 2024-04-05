@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private userDataService: UserDataService,
     private cookie: CookieService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     if (this.cookie.check('user')) {
@@ -60,12 +61,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.userDataService.logInUser(userLoginData)
       .pipe(
         mergeMap((token: userToken) => {
-          return this.userDataService.getUsers().pipe(
-            map((usersList) => {
-              const loggedUser = usersList.filter((userFullData) => userFullData.email === userLoginData.email);
-              return this.getStringCookieValue(loggedUser[0], token);
-            })
-          );
+          return this.userDataService.getUsersFromServer()
+            .pipe(
+              map((users: User[]) => {
+                const loggedUser = users.filter((userFullData) => userFullData.email === userLoginData.email);
+                return this.getStringCookieValue(loggedUser[0], token);
+              })
+            );
         }),
         take(1),
         takeUntil(this.notifier$),

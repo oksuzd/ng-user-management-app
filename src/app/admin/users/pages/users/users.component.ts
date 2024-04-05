@@ -38,7 +38,8 @@ export class UsersComponent implements OnDestroy {
     private userDataService: UserDataService,
     public usersGridService: UsersGridService,
     public dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   ngOnDestroy() {
     this.notifier$.next(null);
@@ -47,16 +48,17 @@ export class UsersComponent implements OnDestroy {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-
-    this.userDataService.getUsers()
+    this.userDataService.getUsersFromServer()
       .pipe(
         take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe((data) => {
+      .subscribe((data: User[]) => {
         this.rowData = data;
+        // console.log('getUsers', this.rowData);
         this.columnDefs = this.usersGridService.getColDef(data, this.gridApi);
+        this.userDataService.setUsersList(data);
       });
   }
 
@@ -82,10 +84,7 @@ export class UsersComponent implements OnDestroy {
   }
 
   private createUser(user: User) {
-    this.userDataService.createUser({
-      ...user,
-      id: 0
-    })
+    this.userDataService.createUser({...user, id: 0})
       .pipe(
         take(1),
         takeUntil(this.notifier$),
@@ -93,7 +92,9 @@ export class UsersComponent implements OnDestroy {
       )
       .subscribe((res) => {
           this.rowData.push(res);
-          this.gridApi.setRowData(this.rowData);
+          this.userDataService.setUsersList(this.rowData);
+          this.gridApi.setRowData(this.userDataService.getUsersList());
+          console.log('createUser', this.userDataService.getUsersList());
         }
       );
   }
