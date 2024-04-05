@@ -1,8 +1,11 @@
-<div class="header header__left"></div>
-<div class="header header__center">
-  <a mat-button routerLink="">Home</a>
-  <a *ngIf="isLoggedIn" mat-button routerLink="admin/users">Admin</a>
-</div>
-<div class="header header__right">
-  <button mat-button (click)="onLogin()">{{userName}}</button>
+<div class="header">
+  <div class="header__left">
+    <a mat-button routerLink="">Home</a>
+    <a mat-button disabled="{{!isLoggedIn}}" routerLink="admin/users">Users</a>
+  </div>
+  <!--<div class="header header__center"></div>-->
+
+  <div class="header__right">
+    <button mat-button (click)="onLogin()">{{userName}}</button>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 @import "../../../../assets/styles/colors";
 
 :host {
+  //outline: 2px solid blue;
   height: 50px;
   background: $main-background;
   color: #fff;
@@ -9,22 +10,27 @@
   align-items: center;
 
   .header {
+    width: 85%;
+    padding: 15px;
+    //outline: 2px solid black;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
-    &__left {
-      min-width: 130px;
-    }
 
-    &__center {
-      width: 100%;
-    }
-
-    &__right {
-      justify-content: center;
-      min-width: 86px;
-      padding-right: 8px;
-    }
+    //&__left {
+    //  //min-width: 130px;
+    //}
+    //
+    ////&__center {
+    ////  width: 100%;
+    ////}
+    //
+    //&__right {
+    //  //justify-content: center;
+    //  //min-width: 86px;
+    //  //padding-right: 8px;
+    //}
   }
 }
