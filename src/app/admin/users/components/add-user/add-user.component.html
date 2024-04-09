@@ -16,7 +16,7 @@
           <div class="error" *ngIf="hasError('firstName', 'minlength')"
           >Enter at least 3 letters
           </div>
-          <div class="error" *ngIf="hasError('firstName', 'invalidName')"
+          <div class="error" *ngIf="hasError('firstName', 'invalidData')"
           >No numbers or special characters
           </div>
         </div>
@@ -35,7 +35,7 @@
           <div class="error" *ngIf="hasError('lastName', 'minlength')"
           >Enter at least 3 letters
           </div>
-          <div class="error" *ngIf="hasError('lastName', 'invalidName')"
+          <div class="error" *ngIf="hasError('lastName', 'invalidData')"
           >No numbers or special characters
           </div>
         </div>
@@ -51,7 +51,7 @@
           <div class="error" *ngIf="hasError('email','required')"
           >This field is required
           </div>
-          <div class="error" *ngIf="hasError('email', 'email')"
+          <div class="error" *ngIf="hasError('email', 'invalidData')"
           >Enter a valid email
           </div>
           <div class="error" *ngIf="hasError('email', 'existingEmail')"

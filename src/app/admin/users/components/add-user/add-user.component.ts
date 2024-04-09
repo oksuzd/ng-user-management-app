@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { CORRECT_EMAIL, CORRECT_NAME, RegexFormValidator } from "../../validators/user-validators";
+import {
+  CORRECT_EMAIL,
+  CORRECT_NAME,
+  EmailIsTakenValidator,
+  RegexFormValidator
+} from "../../validators/user-validators";
+import { StoreService } from "../../../../services/store.service";
 
 @Component({
   selector: 'app-add-user',
@@ -14,12 +20,13 @@ export class AddUserComponent {
     id: 0,
     firstName: ['qwe', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
     lastName: ['rty', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
-    // email: ['', [Validators.required, Validators.email]]
-    email: ['qwerty@mail.com', [Validators.required, RegexFormValidator(CORRECT_EMAIL)]]
+    email: ['qwerty@mail.com',
+      [Validators.required, RegexFormValidator(CORRECT_EMAIL), EmailIsTakenValidator(this.storeService.getUsersList())]]
   });
 
   constructor(
     private fb: FormBuilder,
+    private storeService: StoreService,
     public dialogRef: MatDialogRef<AddUserComponent>,
   ) {}
 

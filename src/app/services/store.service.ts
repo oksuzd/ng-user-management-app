@@ -14,7 +14,8 @@ export class StoreService {
   constructor(
     private cookie: CookieService,
     private http: HttpClient,
-  ) { }
+  ) {
+  }
 
   private _isLoggedInUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.cookie.check('user'));
   readonly isLoggedInUser$: Observable<boolean> = this._isLoggedInUser$.asObservable();

@@ -44,26 +44,6 @@ export class DataService {
     return this.http.delete<boolean>(REQUEST_URL + `users/${id}`);
   }
 
-  isEmailTaken(email: string): Observable<boolean> {
-
-    // let isEmailExist = false;
-    //
-    // return this.getUsersFromServer()
-    //   .pipe(
-    //     take(1),
-    //     mergeMap((res) => {
-    //       res.forEach((user) => {
-    //         if (email === user.email) {
-    //           isEmailExist = true;
-    //         }
-    //       })
-    //       return of(isEmailExist)
-    //     })
-    //   )
-
-    return of(false);
-  }
-
   private getMappedUsers(users: UserDataResponse[]): User[] {
     return users.map((user) => {
       return {

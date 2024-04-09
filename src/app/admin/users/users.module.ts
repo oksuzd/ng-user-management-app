@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './pages/users/users.component';
 import { AgRowDeleteComponent } from './grid-components/ag-row-delete/ag-row-delete.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
-import { UniqueEmailValidator } from "./validators/unique-email.validator";
 import { UsersGridService } from "./services/users-grid.service";
 import { DeleteUserWarningComponent } from './components/delete-user-warning/delete-user-warning.component';
 
@@ -31,7 +30,6 @@ const routes: Routes = [
     ReactiveFormsModule
   ],
   providers: [
-    UniqueEmailValidator,
     UsersGridService
   ]
 })
