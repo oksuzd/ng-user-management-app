@@ -32,7 +32,6 @@ export class AgRowDeleteComponent implements ICellRendererAngularComp {
       .subscribe((res) => {
         if (!!res) {
           this.params.onDelete(this.params.data);
-          console.log('afterClosed', this.params.data.id);
         }
       });
   }

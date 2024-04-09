@@ -10,9 +10,11 @@ import {
 
 import { MatDialog } from "@angular/material/dialog";
 import { AddUserComponent } from "../../components/add-user/add-user.component";
-import { UserDataService } from "../../../../services/user-data.service";
+import { DataService } from "../../../../services/data.service";
 import { User } from "../../../../models/user.model";
 import { UsersGridService } from "../../services/users-grid.service";
+import { isEmailInvalid } from "../../validators/user-validators";
+import { StoreService } from "../../../../services/store.service";
 
 @Component({
   selector: 'app-users',
@@ -35,9 +37,10 @@ export class UsersComponent implements OnDestroy {
   private notifier$: Subject<null> = new Subject();
 
   constructor(
-    private userDataService: UserDataService,
+    private dataService: DataService,
+    private storeService: StoreService,
     public usersGridService: UsersGridService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {
   }
 
@@ -48,7 +51,8 @@ export class UsersComponent implements OnDestroy {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-    this.userDataService.getUsersFromServer()
+
+    this.dataService.getUsersFromServer()
       .pipe(
         take(1),
         takeUntil(this.notifier$),
@@ -56,10 +60,10 @@ export class UsersComponent implements OnDestroy {
       )
       .subscribe((data: User[]) => {
         this.rowData = data;
-        // console.log('getUsers', this.rowData);
-        this.columnDefs = this.usersGridService.getColDef(data, this.gridApi);
-        this.userDataService.setUsersList(data);
+        this.storeService.setUsersList(data);
+        this.columnDefs = this.usersGridService.getColDef(this.rowData, this.gridApi);
       });
+
   }
 
   onCellValueChanged(event: CellValueChangedEvent) {
@@ -75,48 +79,49 @@ export class UsersComponent implements OnDestroy {
     }
   }
 
-  addUser() {
+  onClickAddUser() {
     const dialogRef = this.dialog.open(AddUserComponent, {width: '350px'});
     dialogRef.afterClosed()
       .subscribe((res) => {
-        !!res && this.createUser(res);
+        !!res && this.addUser(res);
       });
   }
 
-  private createUser(user: User) {
-    this.userDataService.createUser({...user, id: 0})
+  private addUser(user: User) {
+    this.dataService.addNewUser({...user})
       .pipe(
         take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
       .subscribe((res) => {
-          this.rowData.push(res);
-          this.userDataService.setUsersList(this.rowData);
-          this.gridApi.setRowData(this.userDataService.getUsersList());
-          console.log('createUser', this.userDataService.getUsersList());
+          this.storeService.addUserToTheList(res);
+          this.rowData = this.storeService.getUsersList();
+          this.gridApi.setRowData(this.rowData);
+          this.gridApi.refreshCells();
         }
       );
   }
 
   private updateUser(user: User) {
-    this.userDataService.updateUser(user)
+    this.dataService.updateUser(user)
       .pipe(
         take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
       .subscribe((res) => {
-          const itemIndex = this.rowData.findIndex((user) => user.id === res.id);
+          const itemIndex: number = this.rowData.findIndex((user) => user.id === res.id);
           this.rowData[itemIndex] = res;
           this.gridApi.setRowData(this.rowData);
+          this.storeService.setUsersList(this.rowData);
         }
       );
   }
 
-  private isUserDataValid(user: User) {
+  private isUserDataValid(user: User): boolean {
     return !this.usersGridService.isTextValueInvalid(user.firstName) &&
       !this.usersGridService.isTextValueInvalid(user.lastName) &&
-      !this.usersGridService.isEmailInvalid(user.email);
+      !isEmailInvalid(user.email);
   }
 }

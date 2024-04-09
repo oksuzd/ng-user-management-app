@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
-import { UserDataService } from "../../../services/user-data.service";
+import { DataService } from "../../../services/data.service";
 import { UserLogin, userToken } from "../../../models/login.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { catchError, map, mergeMap, Subject, take, takeUntil, throwError } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { User } from "../../../models/user.model";
 import { Router } from "@angular/router";
+import { StoreService } from "../../../services/store.service";
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<LoginComponent>,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private userDataService: UserDataService,
+    private dataService: DataService,
+    private storeService: StoreService,
     private cookie: CookieService,
     private router: Router
   ) {
@@ -58,10 +60,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   onLogInClick(userLoginData: UserLogin) {
-    this.userDataService.logInUser(userLoginData)
+    this.storeService.logInUser(userLoginData)
       .pipe(
         mergeMap((token: userToken) => {
-          return this.userDataService.getUsersFromServer()
+          return this.dataService.getUsersFromServer()
             .pipe(
               map((users: User[]) => {
                 const loggedUser = users.filter((userFullData) => userFullData.email === userLoginData.email);
@@ -81,14 +83,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         if (res) {
           this.cookie.set('user', res, {expires: 3});
-          this.userDataService.setUserLoginStatus(!!res);
+          this.storeService.setUserLoginStatus(!!res);
           this.dialogRef.close();
         }
       });
   }
 
   onLogOutClick() {
-    this.userDataService.isLoggedInUser$
+    this.storeService.isLoggedInUser$
       .pipe(
         take(1),
         takeUntil(this.notifier$),
@@ -103,7 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           });
           this.isUserLoggedIn = false;
           this.loginForm.get('email')?.enable();
-          this.userDataService.setUserLoginStatus(false);
+          this.storeService.setUserLoginStatus(false);
           this.router.navigate(['/']).then();
         }
       });

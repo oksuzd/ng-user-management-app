@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserDataService } from "../../../services/user-data.service";
 import { catchError, Subject, takeUntil, throwError } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { CookieService } from "ngx-cookie-service";
 import { LoginComponent } from "../../../auth/components/login/login.component";
+import { StoreService } from "../../../services/store.service";
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private userDataService: UserDataService,
+    private storeService: StoreService,
     private cookie: CookieService,
   ) {}
 
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private setLoginStatus() {
-    this.userDataService.isLoggedInUser$
+    this.storeService.isLoggedInUser$
       .pipe(
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))

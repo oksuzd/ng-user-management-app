@@ -3,8 +3,9 @@ import { ColDef, GridApi, ICellRendererParams } from "ag-grid-community";
 import { AgRowDeleteComponent } from "../grid-components/ag-row-delete/ag-row-delete.component";
 import { catchError, Subject, take, takeUntil, tap, throwError } from "rxjs";
 import { User, UserCellsParams } from "../../../models/user.model";
-import { isNameValid } from "../validators/reg-name.validator";
-import { UserDataService } from "../../../services/user-data.service";
+import { isEmailInvalid, isNameValid } from "../validators/user-validators";
+import { DataService } from "../../../services/data.service";
+import { StoreService } from "../../../services/store.service";
 
 @Injectable()
 export class UsersGridService implements OnDestroy {
@@ -12,7 +13,8 @@ export class UsersGridService implements OnDestroy {
   private notifier$: Subject<null> = new Subject();
 
   constructor(
-    private userDataService: UserDataService,
+    private dataService: DataService,
+    private storeService: StoreService,
   ) {}
 
   ngOnDestroy() {
@@ -51,7 +53,7 @@ export class UsersGridService implements OnDestroy {
         field: 'email', headerName: 'Email', editable: true,
         cellClassRules: {
           ['invalid']: (params) => {
-            return this.isEmailInvalid(params.value);
+            return isEmailInvalid(params.value);
           },
         }
       },
@@ -60,13 +62,13 @@ export class UsersGridService implements OnDestroy {
         field: 'id', headerName: '', maxWidth: 70, cellClass: 'cells-styling__center',
         cellRenderer: AgRowDeleteComponent,
         cellRendererParams: {
-          onDelete: (entity) => {
-            this.userDataService.deleteUser(entity.id)
+          onDelete: (entity: User) => {
+            this.dataService.deleteUser(entity.id)
               .pipe(
                 tap(() => {
                   rowData = rowData.filter((user) => user.id !== entity.id);
+                  this.storeService.setUsersList(rowData);
                   gridApi.setRowData(rowData);
-                  this.userDataService.setUsersList(rowData);
                 }),
                 take(1),
                 takeUntil(this.notifier$),
@@ -83,8 +85,8 @@ export class UsersGridService implements OnDestroy {
     return !value || value.trim() === '' || value.length < 3 || !isNameValid(value);
   }
 
-  isEmailInvalid(email: string): boolean {
-    const correctEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    return !email?.toString().match(correctEmail);
-  }
+  // isEmailInvalid(email: string): boolean {
+  //   const correctEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  //   return !email?.toString().match(correctEmail);
+  // }
 }

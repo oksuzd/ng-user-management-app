@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { CORRECT_NAME, RegexFormValidator } from "../../validators/reg-name.validator";
+import { CORRECT_EMAIL, CORRECT_NAME, RegexFormValidator } from "../../validators/user-validators";
 
 @Component({
   selector: 'app-add-user',
@@ -12,9 +12,10 @@ export class AddUserComponent {
 
   newUserForm: FormGroup = this.fb.group({
     id: 0,
-    firstName: ['', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
-    lastName: ['', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
-    email: ['', [Validators.required, Validators.email]]
+    firstName: ['qwe', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
+    lastName: ['rty', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
+    // email: ['', [Validators.required, Validators.email]]
+    email: ['qwerty@mail.com', [Validators.required, RegexFormValidator(CORRECT_EMAIL)]]
   });
 
   constructor(

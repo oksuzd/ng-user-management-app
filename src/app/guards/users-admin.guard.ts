@@ -1,14 +1,14 @@
 import { inject } from "@angular/core";
-import { UserDataService } from "../services/user-data.service";
 import { Router } from "@angular/router";
 import { map, take } from "rxjs";
+import { StoreService } from "../services/store.service";
 
 export const authGuard = () => {
 
-  const userDataService = inject(UserDataService);
-  const router = inject(Router);
+  const storeService: StoreService = inject(StoreService);
+  const router: Router = inject(Router);
 
-  return userDataService.isLoggedInUser$
+  return storeService.isLoggedInUser$
     .pipe(
       take(1),
       map((res) => {
