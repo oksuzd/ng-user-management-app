@@ -24,7 +24,7 @@ export class UsersGridService implements OnDestroy {
 
   getColDef(rowData: User[], gridApi: GridApi<User>): ColDef[] {
     return [
-      {field: 'id', headerName: '', minWidth: 40, maxWidth: 50},
+      {field: 'id', headerName: 'ID', minWidth: 40, maxWidth: 50},
 
       {
         field: 'avatar', headerName: '', maxWidth: 64, autoHeight: true, cellClass: 'user-avatar',
@@ -84,9 +84,4 @@ export class UsersGridService implements OnDestroy {
   isTextValueInvalid(value: string): boolean {
     return !value || value.trim() === '' || value.length < 3 || !isNameValid(value);
   }
-
-  // isEmailInvalid(email: string): boolean {
-  //   const correctEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  //   return !email?.toString().match(correctEmail);
-  // }
 }

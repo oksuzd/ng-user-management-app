@@ -15,8 +15,7 @@ export class AgRowDeleteComponent implements ICellRendererAngularComp {
 
   params!: ICellRendererParams & UserCellsParams;
 
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog) {}
 
   agInit(params: ICellRendererParams & UserCellsParams) {
     this.params = params;

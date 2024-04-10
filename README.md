@@ -1,6 +1,15 @@
-# Angular apps
+# User management app
 
-This app presents some training projects that were developed on Angular v.16.
+This is an educational app for user management.
+Features include user addition, deletion, and editing functionalities.
+Developed using Angular version 16.
+Utilizes RxJS library for reactive programming.
+Integrates with REST API via Swagger UI interface (requires.in).
+AG Grid used for data presentation.
+Custom user interface implemented with Angular Material library.
 
-1. A table with users that can only be accessed by the logged-in user. I used API from reqres.in and AG Grid instrumentary.
-2. The weather app with various API: api.ipgeolocation.io, api.geoapify.com, api.weatherapi.com, pixabay.com.
+
+## Installation and running
+
+npm install
+ng serve

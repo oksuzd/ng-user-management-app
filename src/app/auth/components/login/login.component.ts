@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private storeService: StoreService,
     private cookie: CookieService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     if (this.cookie.check('user')) {
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   onCancelClick() {
     this.dialogRef.close();
   }
-
 
   onLogInClick(userLoginData: UserLogin) {
     this.storeService.logInUser(userLoginData)

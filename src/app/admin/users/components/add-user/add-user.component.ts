@@ -18,9 +18,9 @@ export class AddUserComponent {
 
   newUserForm: FormGroup = this.fb.group({
     id: 0,
-    firstName: ['qwe', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
-    lastName: ['rty', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
-    email: ['qwerty@mail.com',
+    firstName: ['', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
+    lastName: ['', [Validators.required, Validators.minLength(3), RegexFormValidator(CORRECT_NAME)]],
+    email: ['',
       [Validators.required, RegexFormValidator(CORRECT_EMAIL), EmailIsTakenValidator(this.storeService.getUsersList())]]
   });
 

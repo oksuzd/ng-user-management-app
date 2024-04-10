@@ -1,16 +1,17 @@
 <div class="user-instruments">
-  <button class="user-instruments_button" mat-raised-button (click)="sizeToFit()">Resize</button>
   <button class="user-instruments_button" mat-raised-button (click)="onClickAddUser()">Add User</button>
+  <button class="user-instruments_button" mat-raised-button (click)="sizeToFit()">Resize</button>
 </div>
 <ag-grid-angular
-  style="width: 100%; height: calc(100%);"
-  class="ag-theme-alpine users-grid"
-  [columnDefs]="columnDefs"
-  [defaultColDef]="defaultColDef"
-  [rowData]="rowData"
-  [rowSelection]="'multiple'"
-  [animateRows]="true"
-  (gridReady)="onGridReady($event)"
-  (modelUpdated)="sizeToFit()"
-  (cellValueChanged)="onCellValueChanged($event)"
+    style="width: 100%; height: calc(100%);"
+    class="ag-theme-alpine users-grid"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [rowData]="rowData"
+    [rowSelection]="'multiple'"
+    [animateRows]="true"
+    (gridReady)="onGridReady($event)"
+    (modelUpdated)="sizeToFit()"
+    (viewportChanged)="sizeToFit()"
+    (cellValueChanged)="onCellValueChanged($event)"
 ></ag-grid-angular>

@@ -41,8 +41,7 @@ export class UsersComponent implements OnDestroy {
     private storeService: StoreService,
     public usersGridService: UsersGridService,
     public dialog: MatDialog,
-  ) {
-  }
+  ) {}
 
   ngOnDestroy() {
     this.notifier$.next(null);
@@ -73,18 +72,18 @@ export class UsersComponent implements OnDestroy {
     }
   }
 
-  sizeToFit() {
-    if (this.gridApi) {
-      this.gridApi.sizeColumnsToFit();
-    }
-  }
-
   onClickAddUser() {
     const dialogRef = this.dialog.open(AddUserComponent, {width: '350px'});
     dialogRef.afterClosed()
       .subscribe((res) => {
         !!res && this.addUser(res);
       });
+  }
+
+  sizeToFit() {
+    if (this.gridApi) {
+      this.gridApi.sizeColumnsToFit();
+    }
   }
 
   private addUser(user: User) {

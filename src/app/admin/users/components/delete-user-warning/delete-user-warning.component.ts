@@ -8,8 +8,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 })
 export class DeleteUserWarningComponent {
 
-  constructor(public dialogRef: MatDialogRef<DeleteUserWarningComponent>) {
-  }
+  constructor(public dialogRef: MatDialogRef<DeleteUserWarningComponent>) {}
 
   onNoClick() {
     this.dialogRef.close();

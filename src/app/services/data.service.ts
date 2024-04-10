@@ -12,8 +12,7 @@ export class DataService {
   constructor(
     public dialog: MatDialog,
     private http: HttpClient,
-  ) {
-  }
+  ) {}
 
   getUsersFromServer(): Observable<User[]> {
     return this.http.get<UserResponse>(REQUEST_URL + 'users')

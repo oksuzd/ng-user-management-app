@@ -1,7 +1,18 @@
 <div class="header">
   <div class="header__left">
     <a mat-button routerLink="">Home</a>
-    <a mat-button disabled="{{!isLoggedIn}}" routerLink="admin/users">Users</a>
+    <span matTooltip="{{isLoggedIn ? '' : 'You need to login'}}"
+          [matTooltipShowDelay]="500"
+          [matTooltipHideDelay]="100"
+    >
+      <a mat-button
+         routerLink="admin/users"
+         disabled="{{!isLoggedIn}}"
+         class="example-button"
+      >
+        Users
+      </a>
+    </span>
   </div>
   <div class="header__right">
     <button mat-button (click)="onLogin()">{{userName}}</button>

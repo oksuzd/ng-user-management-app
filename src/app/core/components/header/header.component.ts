@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, Subject, takeUntil, throwError } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { CookieService } from "ngx-cookie-service";
@@ -8,7 +8,7 @@ import { StoreService } from "../../../services/store.service";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private storeService: StoreService,
     private cookie: CookieService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.isLoggedIn = false;
           this.userName = 'Login';
         }
+        this.cdr.detectChanges();
       });
   }
 }

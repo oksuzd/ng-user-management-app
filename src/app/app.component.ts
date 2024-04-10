@@ -8,7 +8,7 @@ import { LoaderService } from "./interceptors/loader/loader.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'My study angular projects';
+  title = 'User Management App';
 
   constructor(public loaderService: LoaderService) {}
 }

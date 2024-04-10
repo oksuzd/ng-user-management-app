@@ -10,6 +10,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 const materialModules = [
   MatButtonModule,
@@ -21,6 +22,7 @@ const materialModules = [
   MatAutocompleteModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
+  MatTooltipModule
 ];
 
 @NgModule({
